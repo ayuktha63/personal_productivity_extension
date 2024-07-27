@@ -1,0 +1,185 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.video-background video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.welcome-message {
+    position: fixed;
+    top: 10%;
+    left: 33%;
+    transform: translateX(-50%);
+    font-size: 48px; /* Larger font size */
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.8); /* Fully transparent white font */
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.4); /* Semi-transparent background for better readability */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px); /* Glassmorphism effect */
+    animation: pulseAnimation 3s infinite; /* Animation */
+    font-family: 'Roboto', sans-serif; /* Change to an animated font if needed */
+}
+
+@keyframes pulseAnimation {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+}
+
+.search-bar {
+    position: fixed;
+    top: 40%; /* Adjusted position */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.6); /* Transparent background */
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    backdrop-filter: blur(10px); /* Glassmorphism effect */
+}
+
+.search-bar input[type="text"] {
+    width: calc(100% - 90px);
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.9); /* Slightly more opaque for input */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.search-bar button:hover {
+    background: #0056b3;
+}
+
+#todo-list {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.6); /* Transparent background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    display: none; /* Initially hidden */
+    backdrop-filter: blur(10px); /* Glassmorphism effect */
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+#todo-list h2 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+}
+
+#todo-list p {
+    margin: 0 0 10px;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+}
+
+#todo-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#todo-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+    position: relative;
+}
+
+#todo-list li:last-child {
+    border-bottom: none;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #FF6B6B;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.delete-btn:hover {
+    color: #FF4C4C;
+    background-color: #ddd;
+    border-radius: 100px;
+}
+
+.undo-btn {
+    display: block;
+    margin: 10px auto 0;
+    padding: 10px 20px;
+    background: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.undo-btn:hover {
+    background: #218838;
+}

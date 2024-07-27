@@ -1,0 +1,11 @@
+{
+    "manifest_version": 2,
+    "name": "To-Do List Background",
+    "version": "1.0",
+    "description": "A To-Do List application displayed as the new tab background.",
+    "permissions": ["storage"],
+    "chrome_url_overrides": {
+      "newtab": "templates/index.html"
+    }
+  }
+  
