@@ -24,10 +24,12 @@ def handle_todos():
         return jsonify(new_item), 201
 
     elif request.method == 'DELETE':
-        item_to_delete = request.json
-        # Here you can manage how to handle "soft" deletes, e.g., by adding a 'deleted' field
-        # but for now, it will just return the item without deleting from DB
-        return jsonify(item_to_delete)
+        item_to_delete = request.json.get('content')
+        result = todos_collection.delete_one({'content': item_to_delete})
+        if result.deleted_count == 1:
+            return jsonify({'status': 'success'}), 200
+        else:
+            return jsonify({'status': 'failure', 'message': 'Item not found'}), 404
 
 if __name__ == '__main__':
     app.run(debug=True)

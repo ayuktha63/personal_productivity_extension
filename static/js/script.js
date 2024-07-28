@@ -78,13 +78,21 @@ function addTodoToList(content, isNew) {
 
         // Send request to delete from the database
         try {
-            await fetch('/todos', {
+            const response = await fetch('/todos', {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ content: listItem.textContent.slice(0, -1) })
             });
+            if (response.ok) {
+                // Successfully deleted from DB, keep the item in the undo queue
+            } else {
+                // If deletion failed, remove the item from the undo queue
+                undoQueue.pop();
+            }
         } catch (error) {
             console.error('Error deleting todo:', error);
+            // If deletion failed, remove the item from the undo queue
+            undoQueue.pop();
         }
     };
 
@@ -127,9 +135,55 @@ function checkEnter(event) {
     }
 }
 
-// Fetch existing todos on page load
+// Timer logic
+function startTimer() {
+    const timerDisplay = document.getElementById('timer-display');
+    let startTime = localStorage.getItem('timer-start-time');
+    if (!startTime) {
+        startTime = new Date().getTime();
+        localStorage.setItem('timer-start-time', startTime);
+    }
+
+    setInterval(() => {
+        const currentTime = new Date().getTime();
+        const elapsedTime = currentTime - startTime;
+        const seconds = Math.floor((elapsedTime / 1000) % 60);
+        const minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
+        const hours = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24);
+
+        timerDisplay.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    }, 1000);
+}
+
+// Fetch weather data
+async function fetchWeather() {
+    const city = 'Trivandrum';
+    const apiKey = '7a28a7198cd7408cbc482250242807';
+    try {
+        const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`);
+        if (!response.ok) {
+            throw new Error('Weather data not found');
+        }
+        const data = await response.json();
+        const location = document.getElementById('location');
+        const temperature = document.getElementById('temperature');
+        const description = document.getElementById('description');
+
+        location.textContent = `Location: ${data.location.name}`;
+        temperature.textContent = `Temperature: ${data.current.temp_c}°C`;
+        description.textContent = `Description: ${data.current.condition.text}`;
+    } catch (error) {
+        console.error('Error fetching weather data:', error);
+    }
+}
+
+// Fetch existing todos and weather data on page load
 window.onload = function() {
     fetchTodos();
-    // Set interval to fetch todos every 0.5 seconds
+    // Set interval to fetch todos every 2 seconds
     setInterval(fetchTodos, 500);
+    // Start the timer
+    startTimer();
+    // Fetch weather data
+    fetchWeather();
 }

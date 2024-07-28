@@ -1,48 +1,46 @@
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    position: relative;
+body {
     font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: #f0f0f0;
+    position: relative;
 }
 
 .video-background {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
     z-index: -1;
+    overflow: hidden;
 }
 
-.video-background video {
-    position: absolute;
-    top: 0;
-    left: 0;
+video {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    pointer-events: none;
 }
 
 .welcome-message {
     position: fixed;
-    top: 10%;
+    top: 15%;
     left: 33%;
     transform: translateX(-50%);
-    font-size: 48px; /* Larger font size */
+    font-size: 50px;
     font-weight: bold;
-    color: rgba(255, 255, 255, 0.8); /* Fully transparent white font */
+    color: rgba(255, 255, 255, 0.8);
     z-index: 1;
-    background: rgba(0, 0, 0, 0.4); /* Semi-transparent background for better readability */
+    background: rgba(0, 0, 0, 0.4);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(10px); /* Glassmorphism effect */
-    animation: pulseAnimation 3s infinite; /* Animation */
-    font-family: 'Roboto', sans-serif; /* Change to an animated font if needed */
+    backdrop-filter: blur(10px);
+    animation: pulseAnimation 3s infinite;
+    font-family: 'Roboto', sans-serif;
 }
 
 @keyframes pulseAnimation {
@@ -62,7 +60,7 @@ html, body {
 
 .search-bar {
     position: fixed;
-    top: 40%; /* Adjusted position */
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 80%;
@@ -71,11 +69,11 @@ html, body {
     justify-content: center;
     align-items: center;
     padding: 10px;
-    background: rgba(255, 255, 255, 0.6); /* Transparent background */
+    background: rgba(255, 255, 255, 0.6);
     border-radius: 25px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    backdrop-filter: blur(10px); /* Glassmorphism effect */
+    backdrop-filter: blur(10px);
 }
 
 .search-bar input[type="text"] {
@@ -84,7 +82,7 @@ html, body {
     margin-right: 10px;
     border: none;
     border-radius: 20px;
-    background: rgba(255, 255, 255, 0.9); /* Slightly more opaque for input */
+    background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -110,13 +108,19 @@ html, body {
     max-height: 80vh;
     overflow-y: auto;
     padding: 15px;
-    background: rgba(255, 255, 255, 0.6); /* Transparent background */
+    background: rgba(255, 255, 255, 0.6);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    display: none; /* Initially hidden */
-    backdrop-filter: blur(10px); /* Glassmorphism effect */
-    box-sizing: border-box; /* Ensure padding and border are included in width */
+    display: none;
+    backdrop-filter: blur(10px);
+    box-sizing: border-box;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#todo-list:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 #todo-list h2 {
@@ -182,4 +186,105 @@ html, body {
 
 .undo-btn:hover {
     background: #218838;
+}
+
+.timer-box {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 300px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    backdrop-filter: blur(10px);
+    box-sizing: border-box;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.timer-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.timer-heading {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.timer {
+    font-size: 24px;
+    color: #333;
+}
+
+.weather-box {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 300px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    backdrop-filter: blur(10px);
+    box-sizing: border-box;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.weather-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.weather-heading {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.weather-box p {
+    margin: 0 0 10px;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+}
+.notion-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.calendar-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 800px;
+    height: 600px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    overflow: hidden;
+}
+
+.notion-widget:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
